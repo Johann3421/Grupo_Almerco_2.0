@@ -1,6 +1,11 @@
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { Plus, Pencil, Search } from "lucide-react";
+
+type ProductWithDetails = Prisma.ProductGetPayload<{
+  include: { category: true; brand: true };
+}>;
 
 export default async function AdminProductosPage() {
   const products = await prisma.product.findMany({
@@ -50,7 +55,7 @@ export default async function AdminProductosPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {products.map((product) => (
+            {products.map((product: ProductWithDetails) => (
               <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
