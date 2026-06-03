@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
+
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 
