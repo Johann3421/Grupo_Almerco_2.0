@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { Package, ShoppingCart, DollarSign, Users } from "lucide-react";
+import type { Order, User } from "@prisma/client";
+
+type OrderWithUser = Order & { user: User | null };
 
 export default async function AdminDashboard() {
   const [totalProducts, totalOrders, recentOrders] = await Promise.all([
@@ -83,7 +86,7 @@ export default async function AdminDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {recentOrders.map((order) => (
+                {recentOrders.map((order: OrderWithUser) => (
                   <tr key={order.id}>
                     <td className="py-3 font-medium text-brand-gray">#{order.id.slice(-6).toUpperCase()}</td>
                     <td className="py-3 text-gray-600">{order.user?.name || order.userId}</td>
