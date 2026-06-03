@@ -1,7 +1,11 @@
 import { prisma } from "@/lib/prisma";
-import type { Order } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { Eye } from "lucide-react";
+
+type OrderWithDetails = Prisma.OrderGetPayload<{
+  include: { user: true; items: { include: { product: true } } };
+}>;
 
 const statusColors: Record<string, string> = {
   PENDING: "bg-yellow-100 text-yellow-700",
@@ -40,7 +44,7 @@ export default async function AdminPedidosPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {Object.entries(statusLabels).map(([key, label]) => {
-          const count = orders.filter((o: Order) => o.status === key).length;
+          const count = orders.filter((o: OrderWithDetails) => o.status === key).length;
           return (
             <div key={key} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
               <p className="text-2xl font-bold text-brand-gray">{count}</p>
@@ -65,7 +69,7 @@ export default async function AdminPedidosPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {orders.map((order) => (
+            {orders.map((order: OrderWithDetails) => (
               <tr key={order.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-6 py-4 font-mono font-bold text-brand-gray text-xs">
                   #{order.id.slice(-8).toUpperCase()}
