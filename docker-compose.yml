@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: techstore-web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://techstore_user:techstore_pass@db:5432/techstore?schema=public
+      - NEXTAUTH_URL=http://localhost:3000 # Cambiar esto en producción por tu dominio
+      - NEXTAUTH_SECRET=your_super_secret_key_change_me_in_production
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15-alpine
+    container_name: techstore-db
+    restart: always
+    environment:
+      - POSTGRES_USER=techstore_user
+      - POSTGRES_PASSWORD=techstore_pass
+      - POSTGRES_DB=techstore
+    ports:
+      - "5433:5432" # Expuesto en el puerto 5433 localmente para no colisionar con instalaciones locales
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U techstore_user -d techstore"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
