@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { Order } from "@prisma/client";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 
@@ -39,7 +40,7 @@ export default async function AdminPedidosPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {Object.entries(statusLabels).map(([key, label]) => {
-          const count = orders.filter(o => o.status === key).length;
+          const count = orders.filter((o: Order) => o.status === key).length;
           return (
             <div key={key} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
               <p className="text-2xl font-bold text-brand-gray">{count}</p>
