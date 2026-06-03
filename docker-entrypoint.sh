@@ -1,10 +1,8 @@
 #!/bin/sh
-# Startup script for Docker container:
-# 1. Run pending Prisma migrations
-# 2. Start the Next.js server
+set -e
 
-echo "Running Prisma migrations..."
+echo "=== Running Prisma migrations ==="
 npx prisma migrate deploy
 
-echo "Starting Next.js server..."
+echo "=== Migrations done. Starting Next.js server ==="
 node server.js
