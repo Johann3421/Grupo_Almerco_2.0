@@ -157,7 +157,21 @@ async function main() {
       },
       isNew: false,
       isOffer: true,
-    }
+    },
+    {
+      name: "Demo Producto",
+      slug: "demo-producto",
+      sku: "DEMO-001",
+      description: "Producto de ejemplo para pruebas.",
+      price: 999.00,
+      stock: 10,
+      categoryId: getCatId("laptops"),
+      brandId: getBrandId("asus"),
+      images: ["🖥️"],
+      specs: { "Demo": "Valor" },
+      isNew: true,
+      isOffer: false,
+    },
   ];
 
   await Promise.all(
