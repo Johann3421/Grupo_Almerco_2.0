@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, User, ShoppingCart, Menu, X, Heart } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, Heart, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -37,29 +37,26 @@ export function MainHeader() {
   ];
 
   return (
-    <header className="bg-brand-green sticky top-0 z-40 shadow-lg">
+    <header className="bg-brand-green sticky top-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center gap-4">
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger render={<Button variant="ghost" size="icon" className="text-white hover:bg-white/20 lg:hidden" />}>
+            <SheetTrigger render={<Button variant="ghost" size="icon" className="text-white hover:bg-white/10 lg:hidden" />}>
               <Menu className="w-6 h-6" />
             </SheetTrigger>
             <SheetContent side="left" className="w-80 bg-white p-0">
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
-              <div className="bg-brand-green p-4">
-                <div className="flex items-center justify-between">
-                  <Link href="/" className="text-white font-bold text-xl" onClick={() => setMobileMenuOpen(false)}>
-                    🖥️ TechStore
-                  </Link>
-                </div>
+              <div className="bg-brand-green p-4 flex items-center gap-2 text-white font-bold text-xl">
+                <Monitor className="w-6 h-6" />
+                <span>TechStore</span>
               </div>
               <nav className="p-4">
                 {mobileMenuCategories.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block py-3 px-4 text-brand-gray hover:bg-brand-green-50 hover:text-brand-green rounded-lg transition-colors font-medium"
+                    className="block py-2.5 px-3 text-slate-800 hover:bg-emerald-50 hover:text-emerald-700 rounded-md transition-colors text-sm font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -71,10 +68,10 @@ export function MainHeader() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="bg-white rounded-lg p-1.5 flex items-center justify-center">
-              <span className="text-brand-green font-bold text-lg">🖥️</span>
+            <div className="bg-white rounded-md p-1.5 flex items-center justify-center">
+              <Monitor className="w-5 h-5 text-brand-green" />
             </div>
-            <span className="text-white font-bold text-xl hidden sm:block tracking-tight">
+            <span className="text-white font-bold text-xl tracking-tight hidden sm:block">
               TechStore
             </span>
           </Link>
@@ -84,14 +81,15 @@ export function MainHeader() {
             <div className="relative">
               <Input
                 type="text"
-                placeholder="Buscar productos, marcas y más..."
+                placeholder="Buscar laptops, componentes, marcas..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-4 pr-12 py-2.5 rounded-full bg-white border-0 text-brand-gray placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-white/50"
+                className="w-full pl-4 pr-10 py-2 rounded-full bg-white border-0 text-slate-900 placeholder:text-slate-400 focus-visible:ring-2 focus-visible:ring-white/50 text-sm"
               />
               <button
                 type="submit"
-                className="absolute right-1 top-1/2 -translate-y-1/2 bg-brand-green-dark hover:bg-brand-green text-white p-2 rounded-full transition-colors"
+                aria-label="Buscar"
+                className="absolute right-1 top-1/2 -translate-y-1/2 bg-brand-green-dark hover:bg-emerald-700 text-white p-1.5 rounded-full transition-colors"
               >
                 <Search className="w-4 h-4" />
               </button>
@@ -101,22 +99,22 @@ export function MainHeader() {
           {/* Actions */}
           <div className="flex items-center gap-1 sm:gap-2">
             <Link href="/cuenta" className="hidden sm:flex">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 relative">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <User className="w-5 h-5" />
               </Button>
             </Link>
 
             <Link href="/cuenta" className="hidden sm:flex">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 relative">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <Heart className="w-5 h-5" />
               </Button>
             </Link>
 
             <Link href="/carrito" className="relative">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 relative">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <ShoppingCart className="w-5 h-5" />
                 {itemCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 bg-brand-red text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center p-0 rounded-full badge-bounce border-2 border-brand-green">
+                  <Badge className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center p-0 rounded-full border-2 border-brand-green">
                     {itemCount}
                   </Badge>
                 )}
@@ -128,3 +126,4 @@ export function MainHeader() {
     </header>
   );
 }
+

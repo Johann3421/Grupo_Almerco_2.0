@@ -24,7 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE !== "false";
+  const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
 
   return (
     <html lang="es" className={`${openSans.variable} h-full antialiased`}>

@@ -1,46 +1,28 @@
-"use client";
+import Link from "next/link";
 
-const brands = [
+const mainBrands = [
   "Intel", "AMD", "NVIDIA", "ASUS", "MSI", "Corsair", "Logitech",
-  "Kingston", "Samsung", "HP", "Lenovo", "Dell", "Razer", "HyperX",
-  "Gigabyte", "Cooler Master", "Thermaltake", "Western Digital",
-  "Seagate", "LG", "ViewSonic", "TP-Link", "EVGA", "Zotac",
-  "Acer", "Brother", "Canon", "Epson", "JBL", "SanDisk",
+  "Kingston", "Samsung", "HP", "Lenovo", "Dell", "Razer", "Gigabyte"
 ];
-
-const brandColors: Record<string, string> = {
-  Intel: "#0071C5",
-  AMD: "#ED1C24",
-  NVIDIA: "#76B900",
-  ASUS: "#000000",
-  MSI: "#FF0000",
-  Corsair: "#F0F000",
-  Logitech: "#00B8FC",
-  Kingston: "#FF0000",
-  Samsung: "#1428A0",
-  Razer: "#44D62C",
-};
 
 export function BrandCarousel() {
   return (
-    <section className="py-8 bg-gray-50 overflow-hidden">
-      <div className="brand-scroll">
-        <div className="brand-scroll-content gap-12 px-8">
-          {[...brands, ...brands].map((brand, i) => (
-            <div
-              key={`${brand}-${i}`}
-              className="flex items-center justify-center min-w-[120px] h-16 bg-white rounded-xl px-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-            >
-              <span
-                className="font-bold text-sm whitespace-nowrap"
-                style={{ color: brandColors[brand] || "#2D3436" }}
-              >
-                {brand}
-              </span>
-            </div>
-          ))}
-        </div>
+    <section className="max-w-7xl mx-auto px-4 py-6">
+      <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+        Marcas Principales
+      </h2>
+      <div className="flex flex-wrap gap-2.5 items-center justify-between border-t border-b border-slate-100 py-4">
+        {mainBrands.map((brand) => (
+          <Link
+            key={brand}
+            href={`/productos?q=${encodeURIComponent(brand)}`}
+            className="px-3.5 py-1.5 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 text-xs font-semibold rounded border border-slate-200/60 transition-colors"
+          >
+            {brand}
+          </Link>
+        ))}
       </div>
     </section>
   );
 }
+
