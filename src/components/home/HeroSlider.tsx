@@ -7,43 +7,30 @@ import { Button } from "@/components/ui/button";
 const slides = [
   {
     id: 1,
+    badge: "Laptops & Portátiles",
     title: "Laptops Gaming de Alto Rendimiento",
-    subtitle: "Las mejores marcas con garantía oficial",
-    description: "ASUS ROG, MSI y Lenovo Legion con procesadores Intel y AMD de última generación",
-    bg: "from-slate-950 via-slate-900 to-slate-950",
-    icon: Gamepad2,
-    cta: "Ver Catálogo",
-    href: "/ofertas",
+    description: "ASUS ROG, MSI y Lenovo Legion equipadas con Intel Core i9 y AMD Ryzen 9 de última generación.",
+    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&auto=format&fit=crop&q=80",
+    cta: "Ver Laptops",
+    href: "/categorias/laptops",
   },
   {
     id: 2,
-    title: "Tarjetas Gráficas RTX 40 Series",
-    subtitle: "Rendimiento extremo para gaming y desarrollo",
-    description: "NVIDIA GeForce RTX 4070, 4080 y 4090 con entrega inmediata",
-    bg: "from-slate-950 via-zinc-900 to-slate-950",
-    icon: Cpu,
+    badge: "Tarjetas de Video",
+    title: "NVIDIA GeForce RTX 40 Series",
+    description: "Potencia gráfica sin límites para gaming 4K, renderizado y desarrollo de Inteligencia Artificial.",
+    image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&auto=format&fit=crop&q=80",
     cta: "Ver Tarjetas",
     href: "/categorias/tarjetas-graficas-nvidia",
   },
   {
     id: 3,
-    title: "Procesadores de Última Generación",
-    subtitle: "Intel Core i9 & AMD Ryzen 9",
-    description: "Potencia sin límites para workstations y PCs de alto desempeño",
-    bg: "from-slate-950 via-slate-900 to-slate-950",
-    icon: Zap,
+    badge: "Componentes PC",
+    title: "Procesadores Intel 14va & Ryzen 7000",
+    description: "Workstations y ensamblados de alto desempeño con garantía oficial y soporte técnico directo.",
+    image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&auto=format&fit=crop&q=80",
     cta: "Ver Procesadores",
     href: "/categorias/procesadores",
-  },
-  {
-    id: 4,
-    title: "Envíos a Nivel Nacional",
-    subtitle: "Despacho directo y seguro",
-    description: "Atención personalizada y entregas express en Lima y provincias",
-    bg: "from-slate-950 via-zinc-900 to-slate-950",
-    icon: Truck,
-    cta: "Conocer Más",
-    href: "/productos",
   },
 ];
 
@@ -64,45 +51,47 @@ export function HeroSlider() {
   }, [next]);
 
   return (
-    <section className="relative overflow-hidden bg-slate-950">
-      <div className="relative h-[280px] sm:h-[360px] md:h-[420px]">
+    <section className="relative max-w-7xl mx-auto px-4 pt-4">
+      <div className="relative rounded-2xl overflow-hidden bg-white border border-zinc-200 shadow-xs min-h-[300px] sm:min-h-[360px] md:min-h-[400px]">
         {slides.map((slide, index) => {
-          const Icon = slide.icon;
           return (
             <div
               key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+              className={`absolute inset-0 transition-opacity duration-500 ease-in-out flex items-center ${
+                index === current ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
               }`}
             >
-              <div className={`w-full h-full bg-gradient-to-r ${slide.bg} flex items-center`}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div className="md:col-span-8 text-white space-y-3">
-                      <span className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs px-3 py-1 rounded font-medium">
-                        {slide.subtitle}
-                      </span>
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
-                        {slide.title}
-                      </h2>
-                      <p className="text-slate-300 text-sm sm:text-base max-w-xl">
-                        {slide.description}
-                      </p>
-                      <div className="pt-2">
-                        <a href={slide.href}>
-                          <Button
-                            size="sm"
-                            className="bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded px-6 py-2 shadow-sm text-sm"
-                          >
-                            {slide.cta}
-                          </Button>
-                        </a>
-                      </div>
+              <div className="w-full h-full bg-gradient-to-r from-zinc-50 via-white to-zinc-100 p-6 sm:p-10 md:p-12">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full">
+                  <div className="md:col-span-7 space-y-4">
+                    <span className="inline-block bg-orange-100 text-orange-700 border border-orange-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {slide.badge}
+                    </span>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight leading-tight">
+                      {slide.title}
+                    </h1>
+                    <p className="text-zinc-600 text-sm sm:text-base max-w-xl leading-relaxed">
+                      {slide.description}
+                    </p>
+                    <div className="pt-2">
+                      <a href={slide.href}>
+                        <Button
+                          className="bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm px-7 py-2.5 rounded-lg shadow-sm transition-colors"
+                        >
+                          {slide.cta} →
+                        </Button>
+                      </a>
                     </div>
-                    <div className="hidden md:col-span-4 md:flex items-center justify-center">
-                      <div className="p-8 rounded-2xl bg-white/5 border border-white/10 text-orange-400">
-                        <Icon className="w-24 h-24 stroke-[1.25]" />
-                      </div>
+                  </div>
+
+                  {/* Clean Product Banner Image */}
+                  <div className="hidden md:col-span-5 md:flex items-center justify-center h-full">
+                    <div className="relative w-full h-64 rounded-xl overflow-hidden bg-zinc-50 border border-zinc-200/80 shadow-xs">
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </div>
@@ -110,38 +99,39 @@ export function HeroSlider() {
             </div>
           );
         })}
-      </div>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-slate-900/60 hover:bg-slate-900 text-white p-2 rounded-full transition-colors"
-        aria-label="Anterior"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-slate-900/60 hover:bg-slate-900 text-white p-2 rounded-full transition-colors"
-        aria-label="Siguiente"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+        {/* Navigation Arrows */}
+        <button
+          onClick={prev}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white text-zinc-800 p-2 rounded-full border border-zinc-200 shadow-sm transition-colors"
+          aria-label="Anterior"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white text-zinc-800 p-2 rounded-full border border-zinc-200 shadow-sm transition-colors"
+          aria-label="Siguiente"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`h-1.5 rounded-full transition-all ${
-              index === current ? "bg-orange-500 w-6" : "bg-slate-700 w-2"
-            }`}
-            aria-label={`Slide ${index + 1}`}
-          />
-        ))}
+        {/* Dots */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === current ? "bg-orange-600 w-7" : "bg-zinc-300 w-2 hover:bg-zinc-400"
+              }`}
+              aria-label={`Slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
 
