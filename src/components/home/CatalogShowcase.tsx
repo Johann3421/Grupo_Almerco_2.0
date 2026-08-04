@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Laptop, Cpu, Monitor, HardDrive, Gamepad2, Layers, ArrowRight } from "lucide-react";
+import { Laptop, Cpu, Monitor, Gamepad2, Layers, ArrowRight } from "lucide-react";
 
 const catalogItems = [
   {
@@ -9,7 +9,7 @@ const catalogItems = [
     count: "48+ Modelos",
     icon: Laptop,
     href: "/categorias/laptops",
-    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=80",
     tags: ["ASUS ROG", "Lenovo Legion", "HP Pavilion", "MacBook"],
   },
   {
@@ -33,21 +33,21 @@ const catalogItems = [
     count: "90+ Accesorios",
     icon: Gamepad2,
     href: "/categorias/zona-gaming",
-    image: "https://images.unsplash.com/photo-1593640408182-31c228814edd?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
     tags: ["Mouse Wireless", "Teclados Mecánicos", "Headsets 7.1"],
   },
 ];
 
 export function CatalogShowcase() {
   return (
-    <section className="bg-white border-y border-zinc-100">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
+    <section className="py-6">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between mb-5">
           <div>
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-orange-600">
               Nuestros Catálogos
             </span>
-            <h2 className="text-xl font-black text-zinc-900 tracking-tight mt-0.5">
+            <h2 className="text-lg font-bold text-zinc-900 tracking-tight mt-0.5">
               Explora los Catálogos Principales
             </h2>
           </div>
@@ -67,41 +67,49 @@ export function CatalogShowcase() {
               <Link
                 key={cat.title}
                 href={cat.href}
-                className="group bg-white border border-zinc-200 rounded-xl overflow-hidden transition-all duration-200 hover:border-orange-500 hover:shadow-md flex flex-col"
+                className="group bg-white border border-zinc-200/90 rounded-xl overflow-hidden transition-all duration-200 hover:border-orange-500 hover:shadow-md flex flex-col justify-between"
               >
-                {/* Stock image */}
-                <div className="relative h-36 overflow-hidden bg-zinc-100">
+                {/* Stock image banner */}
+                <div className="relative h-32 overflow-hidden bg-slate-900 flex items-center justify-center">
                   <img
                     src={cat.image}
                     alt={cat.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-85 group-hover:opacity-100"
+                    onError={(e) => {
+                      // Fallback if network image fails
+                      (e.target as HTMLElement).style.display = "none";
+                    }}
                   />
-                  <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/30 transition-colors" />
-                  <div className="absolute bottom-2.5 left-3 flex items-center gap-2">
-                    <div className="p-1.5 rounded bg-orange-600 text-white">
-                      <Icon className="w-3.5 h-3.5" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  
+                  {/* Badge & Icon overlay */}
+                  <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10">
+                    <div className="flex items-center gap-2">
+                      <div className="p-1.5 rounded-md bg-orange-600 text-white shadow-xs">
+                        <Icon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[11px] font-bold text-white drop-shadow-xs">{cat.count}</span>
                     </div>
-                    <span className="text-[11px] font-bold text-white">{cat.count}</span>
                   </div>
                 </div>
 
-                <div className="p-4 flex flex-col flex-1 justify-between">
+                <div className="p-4 flex flex-col flex-1 justify-between bg-white">
                   <div>
-                    <h3 className="font-extrabold text-sm text-zinc-900 group-hover:text-orange-600 transition-colors mb-2">
+                    <h3 className="font-bold text-sm text-zinc-900 group-hover:text-orange-600 transition-colors mb-2">
                       {cat.title}
                     </h3>
                     <div className="flex flex-wrap gap-1 mb-3">
                       {cat.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] bg-zinc-50 border border-zinc-200/80 text-zinc-600 px-2 py-0.5 rounded">
+                        <span key={tag} className="text-[10px] bg-zinc-100/80 text-zinc-600 px-2 py-0.5 rounded font-medium">
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-zinc-100 text-xs font-bold text-zinc-700 group-hover:text-orange-600 transition-colors">
+                  <div className="flex items-center justify-between pt-2.5 border-t border-zinc-100 text-xs font-bold text-zinc-700 group-hover:text-orange-600 transition-colors">
                     <span>Ingresar al Catálogo</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-orange-600" />
                   </div>
                 </div>
               </Link>
@@ -112,3 +120,4 @@ export function CatalogShowcase() {
     </section>
   );
 }
+

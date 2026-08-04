@@ -129,7 +129,7 @@ export function FeaturedProducts() {
   const displayProducts = products.length > 0 ? products : initialSampleProducts;
 
   return (
-    <section className="py-8 bg-slate-50 border-b border-slate-200">
+    <section className="py-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between mb-6">
           <div>
