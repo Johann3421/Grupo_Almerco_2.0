@@ -2,26 +2,39 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Tag, Sparkles, Monitor, Cpu, Laptop, Server } from "lucide-react";
+import { ChevronDown, Tag, Sparkles, Monitor, Cpu, Laptop, Menu } from "lucide-react";
 
 const menuItems = [
   {
-    name: "Productos",
+    name: "Laptops",
+    href: "/categorias/laptops",
+    icon: Laptop,
+    submenu: [
+      { name: "Laptops Gaming", href: "/categorias/laptops?type=gaming" },
+      { name: "Laptops Empresariales", href: "/categorias/laptops?type=business" },
+      { name: "MacBooks & Apple", href: "/categorias/zona-mac-apple" },
+    ],
+  },
+  {
+    name: "PCs Ensambladas",
+    href: "/categorias/pcs-ensambladas",
+    icon: Cpu,
+    submenu: [
+      { name: "PC Gaming Extreme", href: "/categorias/pcs-ensambladas?type=gaming" },
+      { name: "PC Workstation", href: "/categorias/pcs-ensambladas?type=workstation" },
+      { name: "PC Oficina", href: "/categorias/pcs-ensambladas?type=office" },
+    ],
+  },
+  {
+    name: "Componentes",
     href: "/productos",
     icon: Monitor,
     submenu: [
-      { name: "Laptops", href: "/categorias/laptops" },
-      { name: "Monitores", href: "/categorias/monitores-pantallas" },
-      { name: "Procesadores", href: "/categorias/procesadores" },
-      { name: "Tarjetas Gráficas", href: "/categorias/tarjetas-graficas-nvidia" },
+      { name: "Procesadores Intel / AMD", href: "/categorias/procesadores" },
+      { name: "Tarjetas Gráficas RTX", href: "/categorias/tarjetas-graficas-nvidia" },
       { name: "Memorias RAM", href: "/categorias/memorias-ram" },
-      { name: "Discos Duros", href: "/categorias/discos-duros-internos" },
+      { name: "Discos Duros / SSD", href: "/categorias/discos-duros-internos" },
       { name: "Placas Madre", href: "/categorias/placas-madre" },
-      { name: "Case y Fuentes", href: "/categorias/case-fuentes" },
-      { name: "Teclados", href: "/categorias/teclados" },
-      { name: "Mouse", href: "/categorias/mouse" },
-      { name: "Auriculares", href: "/categorias/auriculares-microfonos" },
-      { name: "Impresoras", href: "/categorias/impresoras-scanners" },
     ],
   },
   {
@@ -33,14 +46,9 @@ const menuItems = [
       { name: "MSI", href: "/marcas/msi" },
       { name: "Lenovo", href: "/marcas/lenovo" },
       { name: "HP", href: "/marcas/hp" },
-      { name: "Corsair", href: "/marcas/corsair" },
-      { name: "Logitech", href: "/marcas/logitech" },
       { name: "Intel", href: "/marcas/intel" },
       { name: "AMD", href: "/marcas/amd" },
       { name: "NVIDIA", href: "/marcas/nvidia" },
-      { name: "Kingston", href: "/marcas/kingston" },
-      { name: "Samsung", href: "/marcas/samsung" },
-      { name: "Razer", href: "/marcas/razer" },
     ],
   },
   {
@@ -56,47 +64,26 @@ const menuItems = [
     highlight: true,
     submenu: null,
   },
-  {
-    name: "Laptops",
-    href: "/categorias/laptops",
-    icon: Laptop,
-    submenu: [
-      { name: "Laptops Gaming", href: "/categorias/laptops?type=gaming" },
-      { name: "Laptops Empresariales", href: "/categorias/laptops?type=business" },
-      { name: "Laptops Uso General", href: "/categorias/laptops?type=general" },
-      { name: "MacBooks", href: "/categorias/zona-mac-apple" },
-    ],
-  },
-  {
-    name: "PCs de Marca",
-    href: "/categorias/pcs-desktop-de-marca",
-    icon: Server,
-    submenu: [
-      { name: "HP Desktop", href: "/categorias/pcs-desktop-de-marca?brand=hp" },
-      { name: "Lenovo Desktop", href: "/categorias/pcs-desktop-de-marca?brand=lenovo" },
-      { name: "Dell Desktop", href: "/categorias/pcs-desktop-de-marca?brand=dell" },
-    ],
-  },
-  {
-    name: "PCs Ensambladas",
-    href: "/categorias/pcs-ensambladas",
-    icon: Cpu,
-    submenu: [
-      { name: "PC Gaming", href: "/categorias/pcs-ensambladas?type=gaming" },
-      { name: "PC Oficina", href: "/categorias/pcs-ensambladas?type=office" },
-      { name: "PC Diseño", href: "/categorias/pcs-ensambladas?type=design" },
-      { name: "PC Workstation", href: "/categorias/pcs-ensambladas?type=workstation" },
-    ],
-  },
 ];
 
 export function MegaMenu() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   return (
-    <nav className="bg-white border-b border-gray-200 hidden lg:block relative z-30">
-      <div className="max-w-7xl mx-auto px-4">
-        <ul className="flex items-center gap-0">
+    <nav className="bg-white border-b border-slate-200 hidden lg:block relative z-30 shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        <ul className="flex items-center gap-1">
+          {/* Main All Categories Button */}
+          <li className="relative">
+            <Link
+              href="/productos"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-t transition-colors"
+            >
+              <Menu className="w-4 h-4 text-blue-400" />
+              <span>TODAS LAS CATEGORÍAS</span>
+            </Link>
+          </li>
+
           {menuItems.map((item) => (
             <li
               key={item.name}
@@ -106,45 +93,40 @@ export function MegaMenu() {
             >
               <Link
                 href={item.href}
-                className={`flex items-center gap-1.5 px-4 py-3 text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold transition-colors ${
                   item.highlight
-                    ? "text-brand-red hover:text-brand-red-dark"
-                    : "text-brand-gray hover:text-brand-green"
+                    ? "text-red-600 hover:text-red-700 font-bold"
+                    : "text-slate-700 hover:text-blue-600"
                 }`}
               >
-                <item.icon className="w-4 h-4" />
+                <item.icon className="w-3.5 h-3.5" />
                 {item.name}
-                {item.submenu && <ChevronDown className="w-3 h-3" />}
+                {item.submenu && <ChevronDown className="w-3 h-3 text-slate-400" />}
               </Link>
 
-              {/* Dropdown */}
+              {/* Submenu */}
               {item.submenu && activeMenu === item.name && (
-                <div className="absolute top-full left-0 bg-white rounded-b-xl shadow-xl border border-gray-100 min-w-[240px] mega-menu-enter z-50">
-                  <div className="p-2">
-                    {item.submenu.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block px-4 py-2.5 text-sm text-brand-gray hover:bg-brand-green-50 hover:text-brand-green rounded-lg transition-colors"
-                      >
-                        {sub.name}
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="border-t border-gray-100 p-3">
+                <div className="absolute top-full left-0 bg-white rounded-b border border-slate-200 shadow-lg min-w-[200px] z-50 py-1">
+                  {item.submenu.map((sub) => (
                     <Link
-                      href={item.href}
-                      className="block text-center text-sm text-brand-green font-semibold hover:text-brand-green-dark transition-colors"
+                      key={sub.href}
+                      href={sub.href}
+                      className="block px-4 py-2 text-xs text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
                     >
-                      Ver todo →
+                      {sub.name}
                     </Link>
-                  </div>
+                  ))}
                 </div>
               )}
             </li>
           ))}
         </ul>
+
+        <div className="text-xs font-semibold text-slate-500">
+          Envíos a todo el Perú
+        </div>
       </div>
     </nav>
   );
 }
+

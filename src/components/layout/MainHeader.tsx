@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, User, ShoppingCart, Menu, Heart, Monitor } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,7 @@ export function MainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const itemCount = useCartStore((s) => s.getItemCount());
+  const subtotal = useCartStore((s) => s.getSubtotal());
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,39 +25,38 @@ export function MainHeader() {
   };
 
   const mobileMenuCategories = [
-    { name: "Productos", href: "/productos" },
-    { name: "Ofertas", href: "/ofertas" },
-    { name: "Novedades", href: "/novedades" },
-    { name: "Laptops", href: "/categorias/laptops" },
-    { name: "PCs de Marca", href: "/categorias/pcs-desktop-de-marca" },
+    { name: "Laptops & Notebooks", href: "/categorias/laptops" },
     { name: "PCs Ensambladas", href: "/categorias/pcs-ensambladas" },
+    { name: "PCs de Marca", href: "/categorias/pcs-desktop-de-marca" },
+    { name: "Tarjetas Gráficas", href: "/categorias/tarjetas-graficas-nvidia" },
+    { name: "Procesadores", href: "/categorias/procesadores" },
     { name: "Zona Gaming", href: "/categorias/zona-gaming" },
-    { name: "Marcas", href: "/productos?view=brands" },
+    { name: "Puntos POS / Empresa", href: "/categorias/punto-de-venta-pos" },
+    { name: "Ofertas Especiales", href: "/ofertas" },
     { name: "Mi Cuenta", href: "/cuenta" },
-    { name: "Mis Pedidos", href: "/cuenta/pedidos" },
   ];
 
   return (
-    <header className="bg-brand-green sticky top-0 z-40 shadow-sm">
+    <header className="bg-slate-900 text-white sticky top-0 z-40 shadow-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center gap-4">
-          {/* Mobile Menu */}
+        <div className="flex items-center justify-between gap-4">
+          {/* Mobile Trigger */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger render={<Button variant="ghost" size="icon" className="text-white hover:bg-white/10 lg:hidden" />}>
+            <SheetTrigger render={<Button variant="ghost" size="icon" className="text-white hover:bg-slate-800 lg:hidden shrink-0" />}>
               <Menu className="w-6 h-6" />
             </SheetTrigger>
-            <SheetContent side="left" className="w-80 bg-white p-0">
+            <SheetContent side="left" className="w-80 bg-slate-900 text-white p-0 border-slate-800">
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
-              <div className="bg-brand-green p-4 flex items-center gap-2 text-white font-bold text-xl">
-                <Monitor className="w-6 h-6" />
-                <span>TechStore</span>
+              <div className="p-4 border-b border-slate-800 flex items-center gap-2 font-bold text-lg">
+                <Cpu className="w-5 h-5 text-blue-500" />
+                <span>GRUPO ALMERCO</span>
               </div>
-              <nav className="p-4">
+              <nav className="p-4 space-y-1">
                 {mobileMenuCategories.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block py-2.5 px-3 text-slate-800 hover:bg-emerald-50 hover:text-emerald-700 rounded-md transition-colors text-sm font-medium"
+                    className="block py-2.5 px-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded text-xs font-medium transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -66,59 +66,66 @@ export function MainHeader() {
             </SheetContent>
           </Sheet>
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="bg-white rounded-md p-1.5 flex items-center justify-center">
-              <Monitor className="w-5 h-5 text-brand-green" />
+          {/* Corporate Logo */}
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-9 h-9 rounded bg-blue-600 flex items-center justify-center text-white font-black text-xl shadow-xs">
+              GA
             </div>
-            <span className="text-white font-bold text-xl tracking-tight hidden sm:block">
-              TechStore
-            </span>
+            <div className="hidden sm:flex flex-col leading-none">
+              <span className="font-extrabold text-base tracking-tight text-white">
+                GRUPO ALMERCO
+              </span>
+              <span className="text-[10px] font-semibold text-blue-400 tracking-wider uppercase mt-0.5">
+                Tecnología & Cómputo
+              </span>
+            </div>
           </Link>
 
-          {/* Search */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-2xl mx-auto">
-            <div className="relative">
+          {/* High Density Search Bar */}
+          <form onSubmit={handleSearch} className="flex-1 max-w-xl mx-auto">
+            <div className="relative flex items-center">
               <Input
                 type="text"
-                placeholder="Buscar laptops, componentes, marcas..."
+                placeholder="Buscar por marca, modelo o código de producto..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-4 pr-10 py-2 rounded-full bg-white border-0 text-slate-900 placeholder:text-slate-400 focus-visible:ring-2 focus-visible:ring-white/50 text-sm"
+                className="w-full pl-3.5 pr-10 py-1.5 h-9 rounded bg-slate-800 border-slate-700 text-white placeholder:text-slate-400 focus-visible:ring-1 focus-visible:ring-blue-500 text-xs"
               />
               <button
                 type="submit"
                 aria-label="Buscar"
-                className="absolute right-1 top-1/2 -translate-y-1/2 bg-brand-green-dark hover:bg-emerald-700 text-white p-1.5 rounded-full transition-colors"
+                className="absolute right-1 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-1 rounded transition-colors"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-3.5 h-3.5" />
               </button>
             </div>
           </form>
 
-          {/* Actions */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Link href="/cuenta" className="hidden sm:flex">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
-                <User className="w-5 h-5" />
-              </Button>
+          {/* Account & Cart Actions */}
+          <div className="flex items-center gap-3 shrink-0">
+            <Link href="/cuenta" className="hidden md:flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+              <div className="p-1.5 rounded-full bg-slate-800">
+                <User className="w-4 h-4 text-blue-400" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[10px] text-slate-400 leading-tight">Bienvenido</span>
+                <span className="text-xs font-semibold leading-tight">Mi Cuenta</span>
+              </div>
             </Link>
 
-            <Link href="/cuenta" className="hidden sm:flex">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
-                <Heart className="w-5 h-5" />
-              </Button>
-            </Link>
-
-            <Link href="/carrito" className="relative">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
-                <ShoppingCart className="w-5 h-5" />
+            <Link href="/carrito" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-xs font-medium transition-colors">
+              <div className="relative">
+                <ShoppingCart className="w-4 h-4" />
                 {itemCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center p-0 rounded-full border-2 border-brand-green">
+                  <Badge className="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] min-w-[14px] h-[14px] flex items-center justify-center p-0 rounded-full">
                     {itemCount}
                   </Badge>
                 )}
-              </Button>
+              </div>
+              <div className="hidden sm:flex flex-col text-left leading-none">
+                <span className="text-[10px] text-blue-200">Carrito</span>
+                <span className="font-bold text-xs mt-0.5">S/ {subtotal.toFixed(2)}</span>
+              </div>
             </Link>
           </div>
         </div>
@@ -126,4 +133,5 @@ export function MainHeader() {
     </header>
   );
 }
+
 
