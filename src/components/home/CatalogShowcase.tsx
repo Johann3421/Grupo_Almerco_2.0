@@ -9,7 +9,6 @@ const catalogItems = [
     count: "48+ Modelos",
     icon: Laptop,
     href: "/categorias/laptops",
-    color: "from-amber-500 to-orange-600",
     tags: ["ASUS ROG", "Lenovo Legion", "HP Pavilion", "MacBook"],
   },
   {
@@ -17,7 +16,6 @@ const catalogItems = [
     count: "120+ Componentes",
     icon: Cpu,
     href: "/categorias/procesadores",
-    color: "from-zinc-800 to-zinc-950",
     tags: ["Intel 14va", "Ryzen 7000", "RTX 40 Series", "RAM DDR5"],
   },
   {
@@ -25,7 +23,6 @@ const catalogItems = [
     count: "35+ Pantallas",
     icon: Monitor,
     href: "/categorias/monitores-pantallas",
-    color: "from-orange-600 to-red-600",
     tags: ["240Hz Gaming", "IPS 4K", "Curvo OLED", "Diseño Pro"],
   },
   {
@@ -33,7 +30,6 @@ const catalogItems = [
     count: "90+ Accesorios",
     icon: Gamepad2,
     href: "/categorias/zona-gaming",
-    color: "from-zinc-900 to-black",
     tags: ["Mouse Wireless", "Teclados Mecánicos", "Headsets 7.1"],
   },
 ];
@@ -66,11 +62,11 @@ export function CatalogShowcase() {
             <Link
               key={cat.title}
               href={cat.href}
-              className="group relative bg-white border border-zinc-200 rounded-xl p-5 overflow-hidden transition-all duration-200 hover:border-orange-500 hover:shadow-lg flex flex-col justify-between"
+              className="group relative bg-white border border-zinc-200 rounded-xl p-5 overflow-hidden transition-all duration-200 hover:border-orange-500 hover:shadow-md flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 rounded-lg bg-gradient-to-br ${cat.color} text-white shadow-xs`}>
+                  <div className="p-3 rounded-lg bg-slate-900 text-orange-400 border border-slate-800 shadow-xs">
                     <Icon className="w-6 h-6" />
                   </div>
                   <span className="text-[11px] font-bold px-2 py-0.5 bg-zinc-100 text-zinc-700 rounded-full">

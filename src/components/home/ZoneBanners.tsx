@@ -22,13 +22,13 @@ export function ZoneBanners() {
           {/* Enterprise Zone */}
           <Link href="/categorias/punto-de-venta-pos" className="group relative overflow-hidden rounded-lg bg-slate-900 p-6 border border-slate-800 flex flex-col justify-between h-48">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Soluciones Cobertura</span>
+              <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider">Soluciones Cobertura</span>
               <h3 className="text-xl font-bold text-white">Equipos Empresariales</h3>
               <p className="text-slate-400 text-xs">Workstations, Servidores y Puntos POS</p>
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
-              <Building2 className="w-6 h-6 text-slate-300" />
-              <span className="text-xs font-semibold text-slate-300 group-hover:translate-x-1 transition-transform">Ver Catálogo →</span>
+              <Building2 className="w-6 h-6 text-orange-400" />
+              <span className="text-xs font-semibold text-orange-400 group-hover:translate-x-1 transition-transform">Ver Catálogo →</span>
             </div>
           </Link>
 

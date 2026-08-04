@@ -24,7 +24,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <ShieldCheck className="w-5 h-5 text-zinc-900 shrink-0" />
+            <ShieldCheck className="w-5 h-5 text-orange-600 shrink-0" />
             <div>
               <p className="font-bold text-zinc-900 leading-tight">Garantía 100% Oficial</p>
               <p className="text-zinc-500 leading-tight">Soporte directo con la marca</p>
@@ -40,7 +40,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <Headset className="w-5 h-5 text-zinc-900 shrink-0" />
+            <Headset className="w-5 h-5 text-orange-600 shrink-0" />
             <div>
               <p className="font-bold text-zinc-900 leading-tight">Asesoría Especializada</p>
               <p className="text-zinc-500 leading-tight">Atención directa por WhatsApp</p>

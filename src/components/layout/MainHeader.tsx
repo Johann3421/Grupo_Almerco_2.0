@@ -48,7 +48,7 @@ export function MainHeader() {
             <SheetContent side="left" className="w-80 bg-slate-900 text-white p-0 border-slate-800">
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
               <div className="p-4 border-b border-slate-800 flex items-center gap-2 font-bold text-lg">
-                <Cpu className="w-5 h-5 text-blue-500" />
+                <Cpu className="w-5 h-5 text-orange-500" />
                 <span>GRUPO ALMERCO</span>
               </div>
               <nav className="p-4 space-y-1">
