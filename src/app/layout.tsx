@@ -28,7 +28,7 @@ export default function RootLayout({
 
   return (
     <html lang="es" className={`${openSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-gray-950 text-gray-100">
+      <body className="min-h-full flex flex-col font-sans bg-[#F4F5F7] text-zinc-900 antialiased">
         {isMaintenance ? (
           <div className="flex-1 flex flex-col items-center justify-center min-h-screen relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-green/20 via-gray-950 to-gray-950 px-4">
             {/* Background elements */}
