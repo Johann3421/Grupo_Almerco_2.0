@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Package } from "lucide-react";
 
 export function CategoryGrid() {
   const [categories, setCategories] = useState<any[]>([]);
@@ -22,34 +22,45 @@ export function CategoryGrid() {
   }, []);
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-10 bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-gray">
-            Nuestros Productos
-          </h2>
-          <p className="mt-3 text-brand-gray-light text-lg">
-            Encuentra todo lo que necesitas en tecnología
-          </p>
-          <div className="w-20 h-1 bg-brand-green mx-auto mt-4 rounded-full" />
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900">
+              Categorías Destacadas
+            </h2>
+            <p className="text-xs text-slate-500">
+              Explora nuestro catálogo por línea de producto
+            </p>
+          </div>
+          <Link
+            href="/productos"
+            className="text-xs font-semibold text-brand-green hover:underline"
+          >
+            Ver todo →
+          </Link>
         </div>
 
         {loading ? (
           <div className="flex justify-center items-center py-10">
-            <Loader2 className="w-8 h-8 animate-spin text-brand-green" />
+            <Loader2 className="w-6 h-6 animate-spin text-brand-green" />
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/categorias/${cat.slug}`}
-                className="category-card group bg-white rounded-xl border border-gray-100 p-4 flex flex-col items-center text-center hover:border-brand-green/30"
+                className="group bg-slate-50 hover:bg-emerald-50/50 rounded-lg border border-slate-200/80 p-3.5 flex flex-col items-center text-center transition-colors"
               >
-                <div className="w-14 h-14 rounded-xl bg-brand-green-50 flex items-center justify-center mb-3 group-hover:bg-brand-green group-hover:text-white transition-colors">
-                  <span className="text-3xl">{cat.image || "📦"}</span>
+                <div className="w-10 h-10 rounded-md bg-white border border-slate-200 flex items-center justify-center mb-2 text-slate-700 group-hover:text-emerald-600 group-hover:border-emerald-300 transition-colors">
+                  {cat.image && !cat.image.startsWith("http") && cat.image.length < 4 ? (
+                    <span className="text-lg">{cat.image}</span>
+                  ) : (
+                    <Package className="w-5 h-5" />
+                  )}
                 </div>
-                <span className="text-xs sm:text-sm font-semibold text-brand-gray group-hover:text-brand-green transition-colors leading-tight">
+                <span className="text-xs font-medium text-slate-800 group-hover:text-emerald-700 transition-colors line-clamp-1">
                   {cat.name}
                 </span>
               </Link>
@@ -60,3 +71,4 @@ export function CategoryGrid() {
     </section>
   );
 }
+

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Eye, Heart, Star } from "lucide-react";
+import { ShoppingCart, Eye, Heart, Star, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cartStore";
@@ -14,7 +14,7 @@ interface ProductCardProps {
   price: number;
   comparePrice?: number | null;
   image: string;
-  brand: string;
+  brand?: string;
   stock: number;
   isNew?: boolean;
   isOffer?: boolean;
@@ -24,10 +24,11 @@ export function ProductCard({
   id, name, slug, price, comparePrice, image, brand, stock, isNew, isOffer,
 }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
-  // Prisma Decimal fields are serialized as strings in JSON, convert to number
   const numPrice = Number(price);
   const numComparePrice = comparePrice ? Number(comparePrice) : null;
   const discount = numComparePrice ? Math.round(((numComparePrice - numPrice) / numComparePrice) * 100) : 0;
+
+  const isImageUrl = image && (image.startsWith("http") || image.startsWith("/"));
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,73 +38,83 @@ export function ProductCard({
   };
 
   return (
-    <div className="product-card group bg-white rounded-xl border border-gray-100 overflow-hidden relative">
+    <div className="product-card group bg-white rounded-lg border border-slate-200 overflow-hidden relative flex flex-col justify-between">
       {/* Badges */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col gap-1">
-        {isNew && <Badge className="bg-brand-blue text-white text-[10px] font-bold">NUEVO</Badge>}
-        {isOffer && discount > 0 && <Badge className="bg-brand-red text-white text-[10px] font-bold">-{discount}%</Badge>}
+      <div className="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1">
+        {isNew && <Badge className="bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5">NUEVO</Badge>}
+        {isOffer && discount > 0 && <Badge className="bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5">-{discount}%</Badge>}
       </div>
 
       {/* Wishlist */}
-      <button className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-white rounded-full p-1.5 shadow-md hover:text-brand-red">
+      <button 
+        aria-label="Agregar a favoritos"
+        className="absolute top-2.5 right-2.5 z-10 text-slate-400 hover:text-red-500 bg-white/80 p-1.5 rounded-full border border-slate-200 shadow-xs transition-colors"
+      >
         <Heart className="w-4 h-4" />
       </button>
 
       {/* Image */}
       <Link href={`/producto/${slug}`}>
-        <div className="aspect-square bg-gray-50 flex items-center justify-center p-4 overflow-hidden">
-          <span className="text-6xl group-hover:scale-110 transition-transform duration-300">{image}</span>
+        <div className="aspect-square bg-slate-50 flex items-center justify-center p-4 overflow-hidden relative">
+          {isImageUrl ? (
+            <img 
+              src={image} 
+              alt={name} 
+              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : image && image.length < 4 ? (
+            <span className="text-5xl">{image}</span>
+          ) : (
+            <Package className="w-12 h-12 text-slate-300" />
+          )}
         </div>
       </Link>
 
       {/* Info */}
-      <div className="p-4 space-y-2">
-        <p className="text-xs text-brand-green font-semibold uppercase">{brand}</p>
-        <Link href={`/producto/${slug}`}>
-          <h3 className="text-sm font-semibold text-brand-gray line-clamp-2 hover:text-brand-green transition-colors leading-snug min-h-[2.5rem]">
-            {name}
-          </h3>
-        </Link>
-
-        {/* Rating */}
-        <div className="flex items-center gap-0.5">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <Star key={i} className="w-3 h-3 fill-brand-orange text-brand-orange" />
-          ))}
-          <span className="text-xs text-brand-gray-light ml-1">(12)</span>
-        </div>
-
-        {/* Price */}
-        <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold text-brand-green">S/. {numPrice.toFixed(2)}</span>
-          {numComparePrice && numComparePrice > numPrice && (
-            <span className="text-sm text-brand-gray-light line-through">S/. {numComparePrice.toFixed(2)}</span>
-          )}
-        </div>
-
-        {/* Stock */}
-        <p className={`text-xs ${stock > 0 ? "text-brand-green" : "text-brand-red"}`}>
-          {stock > 0 ? `${stock} en stock` : "Agotado"}
-        </p>
-
-        {/* Actions */}
-        <div className="flex gap-2 pt-1">
-          <Button
-            onClick={handleAddToCart}
-            disabled={stock === 0}
-            className="flex-1 bg-brand-green hover:bg-brand-green-dark text-white text-xs h-9 rounded-lg"
-            size="sm"
-          >
-            <ShoppingCart className="w-3.5 h-3.5 mr-1" />
-            Agregar
-          </Button>
+      <div className="p-3.5 flex flex-col flex-1 justify-between space-y-2">
+        <div>
+          {brand && <p className="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider mb-1">{brand}</p>}
           <Link href={`/producto/${slug}`}>
-            <Button variant="outline" size="sm" className="h-9 px-3 rounded-lg border-gray-200 hover:border-brand-green hover:text-brand-green">
-              <Eye className="w-3.5 h-3.5" />
-            </Button>
+            <h3 className="text-xs sm:text-sm font-medium text-slate-900 line-clamp-2 hover:text-emerald-600 transition-colors leading-snug">
+              {name}
+            </h3>
           </Link>
+        </div>
+
+        <div className="pt-2 border-t border-slate-100 space-y-2">
+          {/* Price */}
+          <div className="flex items-baseline gap-2">
+            <span className="text-base font-bold text-slate-900">S/ {numPrice.toFixed(2)}</span>
+            {numComparePrice && numComparePrice > numPrice && (
+              <span className="text-xs text-slate-400 line-through">S/ {numComparePrice.toFixed(2)}</span>
+            )}
+          </div>
+
+          {/* Stock */}
+          <p className={`text-[11px] font-medium ${stock > 0 ? "text-emerald-700" : "text-red-600"}`}>
+            {stock > 0 ? `Disponible (${stock} un.)` : "Agotado"}
+          </p>
+
+          {/* Actions */}
+          <div className="flex gap-1.5 pt-1">
+            <Button
+              onClick={handleAddToCart}
+              disabled={stock === 0}
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs h-8 rounded"
+              size="sm"
+            >
+              <ShoppingCart className="w-3.5 h-3.5 mr-1" />
+              Agregar
+            </Button>
+            <Link href={`/producto/${slug}`}>
+              <Button variant="outline" size="sm" className="h-8 px-2.5 rounded border-slate-200 hover:border-emerald-600 hover:text-emerald-600">
+                <Eye className="w-3.5 h-3.5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
