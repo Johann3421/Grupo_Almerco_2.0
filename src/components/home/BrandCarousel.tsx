@@ -16,7 +16,7 @@ export function BrandCarousel() {
           <Link
             key={brand}
             href={`/productos?q=${encodeURIComponent(brand)}`}
-            className="px-3.5 py-1.5 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 text-xs font-semibold rounded border border-slate-200/60 transition-colors"
+            className="px-3.5 py-1.5 bg-slate-50 hover:bg-orange-50 hover:text-orange-600 text-slate-700 text-xs font-semibold rounded border border-slate-200/60 transition-colors"
           >
             {brand}
           </Link>

@@ -73,9 +73,9 @@ export function ProductCard({
       {/* Info */}
       <div className="p-3.5 flex flex-col flex-1 justify-between space-y-2">
         <div>
-          {brand && <p className="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider mb-1">{brand}</p>}
+          {brand && <p className="text-[11px] font-semibold text-orange-600 uppercase tracking-wider mb-1">{brand}</p>}
           <Link href={`/producto/${slug}`}>
-            <h3 className="text-xs sm:text-sm font-medium text-slate-900 line-clamp-2 hover:text-emerald-600 transition-colors leading-snug">
+            <h3 className="text-xs sm:text-sm font-medium text-slate-900 line-clamp-2 hover:text-orange-600 transition-colors leading-snug">
               {name}
             </h3>
           </Link>
@@ -100,14 +100,14 @@ export function ProductCard({
             <Button
               onClick={handleAddToCart}
               disabled={stock === 0}
-              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs h-8 rounded"
+              className="flex-1 bg-orange-600 hover:bg-orange-700 text-white text-xs h-8 rounded font-medium shadow-2xs"
               size="sm"
             >
               <ShoppingCart className="w-3.5 h-3.5 mr-1" />
               Agregar
             </Button>
             <Link href={`/producto/${slug}`}>
-              <Button variant="outline" size="sm" className="h-8 px-2.5 rounded border-slate-200 hover:border-emerald-600 hover:text-emerald-600">
+              <Button variant="outline" size="sm" className="h-8 px-2.5 rounded border-slate-200 hover:border-orange-600 hover:text-orange-600">
                 <Eye className="w-3.5 h-3.5" />
               </Button>
             </Link>

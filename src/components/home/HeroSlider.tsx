@@ -79,7 +79,7 @@ export function HeroSlider() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                     <div className="md:col-span-8 text-white space-y-3">
-                      <span className="inline-block bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded font-medium">
+                      <span className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs px-3 py-1 rounded font-medium">
                         {slide.subtitle}
                       </span>
                       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
@@ -92,7 +92,7 @@ export function HeroSlider() {
                         <a href={slide.href}>
                           <Button
                             size="sm"
-                            className="bg-brand-green hover:bg-emerald-600 text-white font-semibold rounded px-6 py-2 shadow-sm text-sm"
+                            className="bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded px-6 py-2 shadow-sm text-sm"
                           >
                             {slide.cta}
                           </Button>
@@ -100,7 +100,7 @@ export function HeroSlider() {
                       </div>
                     </div>
                     <div className="hidden md:col-span-4 md:flex items-center justify-center">
-                      <div className="p-8 rounded-2xl bg-white/5 border border-white/10 text-emerald-400">
+                      <div className="p-8 rounded-2xl bg-white/5 border border-white/10 text-orange-400">
                         <Icon className="w-24 h-24 stroke-[1.25]" />
                       </div>
                     </div>
@@ -135,7 +135,7 @@ export function HeroSlider() {
             key={index}
             onClick={() => setCurrent(index)}
             className={`h-1.5 rounded-full transition-all ${
-              index === current ? "bg-emerald-500 w-6" : "bg-slate-700 w-2"
+              index === current ? "bg-orange-500 w-6" : "bg-slate-700 w-2"
             }`}
             aria-label={`Slide ${index + 1}`}
           />

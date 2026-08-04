@@ -9,39 +9,39 @@ export function ZoneBanners() {
           {/* Gaming Zone */}
           <Link href="/categorias/zona-gaming" className="group relative overflow-hidden rounded-lg bg-slate-900 p-6 border border-slate-800 flex flex-col justify-between h-48">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Categoría Específica</span>
+              <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider">Categoría Específica</span>
               <h3 className="text-xl font-bold text-white">Zona Gaming</h3>
               <p className="text-slate-400 text-xs">Laptops, Periféricos y Componentes RGB</p>
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
-              <Gamepad2 className="w-6 h-6 text-emerald-400" />
-              <span className="text-xs font-semibold text-emerald-400 group-hover:translate-x-1 transition-transform">Ver Productos →</span>
+              <Gamepad2 className="w-6 h-6 text-orange-400" />
+              <span className="text-xs font-semibold text-orange-400 group-hover:translate-x-1 transition-transform">Ver Productos →</span>
             </div>
           </Link>
 
           {/* Enterprise Zone */}
           <Link href="/categorias/punto-de-venta-pos" className="group relative overflow-hidden rounded-lg bg-slate-900 p-6 border border-slate-800 flex flex-col justify-between h-48">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">Soluciones Cobertura</span>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Soluciones Cobertura</span>
               <h3 className="text-xl font-bold text-white">Equipos Empresariales</h3>
               <p className="text-slate-400 text-xs">Workstations, Servidores y Puntos POS</p>
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
-              <Building2 className="w-6 h-6 text-blue-400" />
-              <span className="text-xs font-semibold text-blue-400 group-hover:translate-x-1 transition-transform">Ver Catálogo →</span>
+              <Building2 className="w-6 h-6 text-slate-300" />
+              <span className="text-xs font-semibold text-slate-300 group-hover:translate-x-1 transition-transform">Ver Catálogo →</span>
             </div>
           </Link>
 
           {/* Apple Zone */}
           <Link href="/categorias/zona-mac-apple" className="group relative overflow-hidden rounded-lg bg-slate-900 p-6 border border-slate-800 flex flex-col justify-between h-48">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Ecosistema</span>
+              <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider">Ecosistema</span>
               <h3 className="text-xl font-bold text-white">Laptops & Monitores</h3>
               <p className="text-slate-400 text-xs">Equipos de cómputo para oficina y hogar</p>
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
-              <Monitor className="w-6 h-6 text-slate-300" />
-              <span className="text-xs font-semibold text-slate-300 group-hover:translate-x-1 transition-transform">Explorar →</span>
+              <Monitor className="w-6 h-6 text-orange-400" />
+              <span className="text-xs font-semibold text-orange-400 group-hover:translate-x-1 transition-transform">Explorar →</span>
             </div>
           </Link>
         </div>
@@ -49,4 +49,5 @@ export function ZoneBanners() {
     </section>
   );
 }
+
 

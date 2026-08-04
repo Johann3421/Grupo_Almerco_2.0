@@ -77,9 +77,9 @@ export function MegaMenu() {
           <li className="relative">
             <Link
               href="/productos"
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-t transition-colors"
+              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold px-4 py-2.5 rounded-t transition-colors shadow-xs"
             >
-              <Menu className="w-4 h-4 text-blue-400" />
+              <Menu className="w-4 h-4 text-white" />
               <span>TODAS LAS CATEGORÍAS</span>
             </Link>
           </li>
@@ -95,8 +95,8 @@ export function MegaMenu() {
                 href={item.href}
                 className={`flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold transition-colors ${
                   item.highlight
-                    ? "text-red-600 hover:text-red-700 font-bold"
-                    : "text-slate-700 hover:text-blue-600"
+                    ? "text-orange-600 hover:text-orange-700 font-bold"
+                    : "text-slate-700 hover:text-orange-600"
                 }`}
               >
                 <item.icon className="w-3.5 h-3.5" />
@@ -111,7 +111,7 @@ export function MegaMenu() {
                     <Link
                       key={sub.href}
                       href={sub.href}
-                      className="block px-4 py-2 text-xs text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                      className="block px-4 py-2 text-xs text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors font-medium"
                     >
                       {sub.name}
                     </Link>
