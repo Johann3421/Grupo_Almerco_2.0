@@ -17,7 +17,7 @@ const VALID_AUTH_ACTIONS = new Set([
   "register",
 ]);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Interceptar escaneos de bots / vulnerabilidades sobre Server Actions (e.g. Next-Action: x)
